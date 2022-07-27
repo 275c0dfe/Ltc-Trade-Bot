@@ -4,6 +4,8 @@ import kraken
 import time
 import os
 import brain
+import server
+import threading
 
 api_sec = "GIz/HrbyV3T9OjtVVtoBxoCX0HicUtCKXiLhwX8mO1IyDbAGprEkweQ4YWp9b5gmLozhufyxFqXhka4DQuaFEg=="
 api_key = "mUN/wXLMwEof0jmutBJdEJbhf8jHft/PbILRTeWCyhd8/UA+A7IGHsxU"
@@ -11,28 +13,48 @@ client = network.Client(api_key , api_sec , "0123")
 
 pair = "LTCUSD"
 coinName = "XLTCZUSD"
-
 ltc_Ticker = network.Ticker()
 ltc_Ticker.pair = pair
 ltc_Ticker.name = coinName
 
 rateLimit = 3
-
 tradingBrain = brain.brain(client)
-
-
 res = client.getClientBalance().json()["result"]
 tradingBrain.usd = float(res["ZUSD"])
 tradingBrain.ltc = float(res["XLTC"])
 
+config = {"Enable_Brain_Trading":True}
 
 
-while True:
+httpServer = server.HttpServer(("" , 80) , "Trading_Server" , ltc_Ticker)
+
+httpServer.addFile("web/index.html" , cacheable=False)
+httpServer.addFile("web/api.js" , cacheable=False)
+httpServer.addFile("web/style.css" , cacheable=False)
+httpServer.addFile("getData.py" , cacheable=False)
+httpServer.addFile("TradeHistory.txt")
+
+httpServer.tokens["$JqueryRefrence"] = "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js\"></script> "
+httpServer.tokens["$ApiRefrence"] = "<script src='/web/api.js' ></script>"
+httpServer.tokens["$StyleRefrence"] = "<link rel=\"stylesheet\" href=\"/web/style.css\">"
+httpServer.tokens["from requestRefrences import *"] = ""
+httpServer.tokens["$FontLink"] = "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Ubuntu&display=swap\" rel=\"stylesheet\">"
+
+httpServer.bind()
+httpServer.listen(10)
+
+Server_Thread = threading.Thread(target=httpServer.accept_loop)
+Server_Thread.start()
+print("Server Started")
+time.sleep(0.5)
+
+while False:
     try:
         ud = ltc_Ticker.lastUpdate
         if time.time() - ud > rateLimit:
             ltc_Ticker.update()
-            tradingBrain.update(ltc_Ticker.tickerData)
+            if config["Enable_Brain_Trading"]:
+                tradingBrain.update(ltc_Ticker.tickerData)
         
         os.system("cls")
         print(pair)

@@ -1,0 +1,5 @@
+background: 1e6786(Blue Sapphire)
+
+outer_container_border: D0D0DC(Lavender Gray)
+outer_container_background: 50b4a3(Keppel)
+outer_container_text: fffff(White)

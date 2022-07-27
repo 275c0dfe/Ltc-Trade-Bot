@@ -1,0 +1,20 @@
+
+body{
+    background-color: #1e6786;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+
+
+.outer_container {
+    background-color: #50b4a3;
+    border: 6px solid #d0d0dc;
+    border-radius: 12px;
+    color:white;
+}
