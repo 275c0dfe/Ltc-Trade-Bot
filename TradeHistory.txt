@@ -17,3 +17,5 @@ Buy Order Filled 2.103052520491641 LTC/USD For $63.01. Total Usd: $132.5207
 {"error":[],"result":{"txid":["OA5LF2-XNHBD-M74TVH"],"descr":{"order":"sell 2.10878982 LTCUSD @ limit 63.90"}}}
 #Kraken API Trade. buy 0.00011737881842943925LTC At $62.19
 {"error":["EGeneral:Invalid arguments:volume"]}
+#Kraken API Trade. buy 0.00012026973370962933LTC At $60.69
+{"error":["EGeneral:Invalid arguments:volume"]}
