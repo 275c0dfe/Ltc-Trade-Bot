@@ -68,7 +68,7 @@ def ParseQs(qss):
 
 
 class HttpServer:
-    def __init__(self, host, name , ticker):
+    def __init__(self, host, name , ticker , tb):
         self.host = host
         self.name = name
         self.files = []
@@ -85,6 +85,8 @@ class HttpServer:
         self.is_serving = False
         self.is_debug = False
         self.ticker = ticker
+        self.trade_brain = tb
+        self.Data = {}
         connection = {}
         connection["raw_socket"] = self.socket
         connection["bound"] = False
@@ -216,11 +218,14 @@ class HttpServer:
             if ftype == "py":
                 execStr = rcont
                 envir = {}
+                envir["Data"] = self.Data
+                envir["wServer"] = self
                 envir["content"] = rcont
                 envir["urlInfo"] = urlo
                 envir["cookie"] = cookie
                 envir["client"] = client
                 envir["ticker"] = self.ticker
+                envir["bot_brain"] = self.trade_brain
                 try:
                     exec(execStr , envir)
                     rcont = envir["content"]

@@ -17,4 +17,79 @@ body{
     border: 6px solid #d0d0dc;
     border-radius: 12px;
     color:white;
+    
 }
+
+.toffset {
+    margin-top: -4.5%;
+}
+
+.center_text{
+    text-align: center;
+}
+.shutdownButton{
+    display: block;
+    background-color: #f25f5c;
+    border: 2px solid #50514f;
+    color:black;
+    padding: 1vh;
+    text-align: center;
+    width: 10%;
+}
+
+.Button{
+    display: block;
+    background-color: #247ba0;
+    border: 2px solid #50514f;
+    color:white;
+    padding: 1vh;
+    text-align: center;
+    width: 10%;
+    margin-left:80%
+}
+ 
+
+.history_container{
+    height: 35%;
+    overflow-y:auto;
+    border: 4px solid #247ba0;
+    list-style-type: none;
+    padding: 0;
+}
+
+.history_element{
+    background-color: #50514f;
+    border-bottom: 2px solid #247ba0;
+    text-decoration: none;
+    padding: 1vh;
+}
+
+
+.inner_container{
+    background-color: #50514f;
+    height: 30%;
+    overflow-y:auto;
+    border: 4px solid #247ba0;
+    margin-bottom: 1vw;
+    padding-left: 1vw;
+}
+
+.control_element{
+    background-color: #50514f;
+    border-bottom: 2px solid #247ba0;
+    border-left: 2px solid #247ba0;
+    text-decoration: none;
+    padding: 1vh;
+}
+.control_label{
+    border-right:2px solid #247ba0;
+    margin-right: 0.5vw;
+    width: 20%;
+    padding-right: 3%;
+}
+
+
+/* The switch - the box around the slider */
+
+
+

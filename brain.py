@@ -22,6 +22,8 @@ class brain:
 
         self.usd = 100
         self.ltc = 0
+        self.enabled = True
+        self.loop = True
 
         self.openorders = 0
         self.currentOrder = (0, 0, "")
@@ -37,7 +39,7 @@ class brain:
             self.lastBuy = ab[1]
             self.BuyActivation = (ab[1]) - (ab[1] * self.buyMargin)
             self.lastSell = ab[0]
-            self.history.append("Added Data: " + str(ab))
+            self.history.append(f"Initilizing {100 * (self.ticks/20)}%")
             action = True
         else:
             ab = (ticker.ask.price, ticker.bid.price)
@@ -69,7 +71,7 @@ class brain:
 
 
                             res = self.kClient.createOrder("sell" , oltc , "XLTCZUSD" , sps)
-                            self.history.append(res)
+                            
 
                             self.BuyActivation = (
                                 (ab[1]) - (ab[1] * self.buyMargin)
@@ -113,7 +115,7 @@ class brain:
                             bps = float(".".join(bps))
 
                             res = self.kClient.createOrder("buy" , ltc , "XLTCZUSD" , bps)
-                            self.history.append(res)
+                            
                             self.sellActivation = (ab[0]) + (ab[0] * self.sellMargin)
                             self.history.append(
                                 "Buy Order Added "
@@ -188,11 +190,10 @@ class brain:
                         self.waitForOrder = False
                         action = True
 
-        if not action:
-            self.history.append("No Actions Taken")
+        
 
-        if len(self.history) > 64:
-            self.history = self.history[len(self.history) - 17 :]
-            self.history.append("Cleared Log")
+        #if len(self.history) > 128:
+         #   self.history = self.history[len(self.history) - 17 :]
+          #  self.history.append("Cleared Log")
 
         self.ticks += 1

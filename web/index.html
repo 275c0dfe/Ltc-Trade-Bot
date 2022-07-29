@@ -7,10 +7,58 @@
     </head>
     
     <body>
-        <div class="center outer_container">
-            <h1>Trade Control Dashboard</h1>
-            <h2 id="Ticker">Ltc Price: </h2>
-            <h2></h2>
+        <h1>Trade Control Dashboard</h1>
+        <h3>version: 0.0.7</h3>
+        <div class="center outer_container toffset">
+            
+            <h1 id="Ticker">Ltc Price: </h1>
+
+            <div>
+                <h2>Balances</h2>
+                <ul>
+                    <li id="ltc_balance">
+                        Ltc: 0.0
+                    </li>
+                    <li id="usd_balance">
+                        Usd: 0.0
+                    </li>
+                </ul>
+            </div>
+            
+            <div>
+                <ul class="history_container">
+                    
+                </ul>
+            </div>
+
+            <div class="inner_container">
+                <h2>Bot Control</h2>
+                
+                <div class="control_element">
+                    <a class="control_label">Enable Bot</a>
+                    <input id = "enable_bot" type="checkbox">
+                </div>
+                <div class="control_element">
+                    <a class="control_label">Buy Price</a>
+                    <input id ="buy_input" type="number">
+                </div>
+                <div class="control_element">
+                    <a class="control_label">Sell Price</a>
+                    <input id="sell_input" type="number">
+                </div>
+                <div class="control_element">
+                    <a class="control_label">Buy Margin</a>
+                    <input id = "buy_margin" type="number">
+                </div>
+                <div class="control_element">
+                    <a class="control_label">Sell Margin</a>
+                    <input id = "sell_margin" type="number">
+                </div>
+                
+            </div>
+
+
+            <a onclick="shutdownPrompt()" class="shutdownButton">Shutdown</a>
         </div>
     </body>
 
