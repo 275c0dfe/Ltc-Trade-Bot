@@ -34,7 +34,7 @@ if urlInfo.qs_found:
     try:
         val = qs["buy_margin"]
         val = val.replace("!Period" , ".")
-        bot_brain.lastBuy = float(val)
+        bot_brain.buyMargin = float(val)
         content = "OK"
     except:
         pass
@@ -42,7 +42,7 @@ if urlInfo.qs_found:
     try:
         val = qs["sell_margin"]
         val = val.replace("!Period" , ".")
-        bot_brain.lastSell = float(val)
+        bot_brain.sellMargin = float(val)
         content = "OK"
     except:
         pass
