@@ -1,21 +1,2 @@
-#Kraken API Trade. buy 2.1264383308863053LTC At $62.32
-{"error":[],"result":{"txid":["OI335K-U6KTQ-4FCPNY"],"descr":{"order":"buy 2.12643833 LTCUSD @ limit 62.32"}}}
-#Kraken API Trade. buy 2.12138340616946LTC At $62.46
-{"error":["EOrder:Insufficient funds"]}
-#Kraken API Trade. buy 2.0938415912606434LTC At $63.29
-{"error":["EOrder:Insufficient funds"]}
-#Kraken API Trade. buy 2.101071934222146LTC At $63.07
-{"error":["EOrder:Insufficient funds"]}
-#Kraken API Trade. buy 2.1100140751780097LTC At $62.8
-{"error":["EOrder:Insufficient funds"]}
-#Kraken API Trade. buy 2.105367929054623LTC At $62.94
-{"error":["EOrder:Insufficient funds"]}
-#Kraken API Trade. buy 2.103052520491641LTC At $63.01
-{"error":[],"result":{"txid":["OQBDBZ-QLIJX-JKWYJX"],"descr":{"order":"buy 2.10305252 LTCUSD @ limit 63.01"}}}
-Buy Order Filled 2.103052520491641 LTC/USD For $63.01. Total Usd: $132.5207
-#Kraken API Trade. sell 2.10878982LTC At $63.9
-{"error":[],"result":{"txid":["OA5LF2-XNHBD-M74TVH"],"descr":{"order":"sell 2.10878982 LTCUSD @ limit 63.90"}}}
-#Kraken API Trade. buy 0.00011737881842943925LTC At $62.19
-{"error":["EGeneral:Invalid arguments:volume"]}
-#Kraken API Trade. buy 0.00012026973370962933LTC At $60.69
-{"error":["EGeneral:Invalid arguments:volume"]}
+#Kraken API Trade. buy 2.8505321994650057LTC At $62.61
+{"error":[],"result":{"txid":["O56UIY-LZTKH-CAXNK4"],"descr":{"order":"buy 2.85053219 LTCUSD @ limit 62.61"}}}

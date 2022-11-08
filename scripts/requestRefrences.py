@@ -1,7 +1,7 @@
 import socket
-import network
+import kraken
 import brain
-import server
+import litehttp
 class qs_i:
     def __init__(self) -> None:
         self.qs = {}
@@ -16,7 +16,7 @@ urlInfo.qs_found = False
 urlInfo.URI = ""
 cookie = {}
 client = socket.socket(socket.AF_INET , socket.SOCK_STREAM)
-ticker = network.Ticker()
-bot_brain = brain.brain(network.Client("" , "" , ""))
-wServer = server.HttpServer(("" , 80) , "" , ticker , bot_brain)
+ticker = kraken.trade.Ticker()
+bot_brain = brain.brain(kraken.trade.Client("" , "" , ""))
+wServer = litehttp.HttpServer(("" , 80) , "" , ticker , bot_brain)
 Data = {}

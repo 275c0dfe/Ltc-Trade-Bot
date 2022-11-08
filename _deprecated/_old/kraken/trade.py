@@ -1,11 +1,10 @@
+import auth
+import ticker
 import requests
-import kraken
 import time
-
 
 class Client:
     def __init__(self , api_key , api_secret , key) -> None:
-        
         self._api_key = api_key
         self._api_secret = api_secret
         self._key = key
@@ -20,31 +19,28 @@ class Client:
     def getClientBalance(self):
         uri = "/0/private/Balance"
         data = {"nonce":str(int(1000*time.time()))}
-        signiture = kraken.get_kraken_signature(uri , data , self._api_secret)
+        signiture = auth.get_kraken_signature(uri , data , self._api_secret)
         headers = {}
         headers["API-Key"] = self._api_key
         headers["API-Sign"] = signiture
         res = requests.post(self._api_url + uri , headers=headers , data=data)
         return res
-
 
     def getClientOpenOrders(self):
         uri = "/0/private/OpenOrders"
         data = {"nonce":str(int(1000*time.time())) , "trades":True}
-        signiture = kraken.get_kraken_signature(uri , data , self._api_secret)
+        signiture = auth.get_kraken_signature(uri , data , self._api_secret)
         headers = {}
         headers["API-Key"] = self._api_key
         headers["API-Sign"] = signiture
         res = requests.post(self._api_url + uri , headers=headers , data=data)
         return res
 
-
     def createOrder(self , order_type , volume , pair , price):
 
-        
         uri = "/0/private/AddOrder"
         data = {"nonce":str(int(1000*time.time())) , "ordertype":"limit" , "type":order_type , "volume":volume , "pair":pair , "price":price}
-        signiture = kraken.get_kraken_signature(uri , data , self._api_secret)
+        signiture = auth.get_kraken_signature(uri , data , self._api_secret)
         headers = {}
         headers["API-Key"] = self._api_key
         headers["API-Sign"] = signiture
@@ -54,8 +50,6 @@ class Client:
         f.write(res.text + "\n")
         f.close()
         return res.json()
-        
-        
 
 class Ticker:
     def __init__(self) -> None:
@@ -63,13 +57,13 @@ class Ticker:
         self.name = ""
         self.spread = 0
         self.lastUpdate = 0.0
-        self.tickerData = kraken.TickerData()
+        self.tickerData = ticker.TickerData()
 
     def update(self):
         try:
-            uri = "https://api.kraken.com/0/public/Ticker" + kraken.get_pair_qs(self.pair)
+            uri = "https://api.kraken.com/0/public/Ticker" + ticker.get_pair_qs(self.pair)
             resp = requests.get(uri)
-            self.tickerData = kraken.loadTicker(resp.json()["result"][self.name])
+            self.tickerData = ticker.loadTicker(resp.json()["result"][self.name])
             ask = self.tickerData.ask.price
             bid = self.tickerData.bid.price
             spread = ask - bid
@@ -77,4 +71,3 @@ class Ticker:
             self.lastUpdate = time.time()
         except:
             pass
-

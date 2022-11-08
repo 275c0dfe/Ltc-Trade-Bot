@@ -69,9 +69,9 @@ class brain:
                                 sps[1] = sps[1][:1]
                             sps = float(".".join(sps))
 
-
-                            res = self.kClient.createOrder("sell" , oltc , "XLTCZUSD" , sps)
-                            
+                            res = self.kClient.createOrder(
+                                "sell", oltc, "XLTCZUSD", sps
+                            )
 
                             self.BuyActivation = (
                                 (ab[1]) - (ab[1] * self.buyMargin)
@@ -88,7 +88,7 @@ class brain:
                             time.sleep(1.2)
 
             if self.waitBuy:
-                if self.BuyActivation < ticker.ask.price:
+                if ticker.ask.price < self.BuyActivation:
                     if self.BuyActivation < self.lastSell:
                         if not self.waitForOrder:
                             self.waitBuy = False
@@ -114,8 +114,8 @@ class brain:
                                 bps[1] = bps[1][:2]
                             bps = float(".".join(bps))
 
-                            res = self.kClient.createOrder("buy" , ltc , "XLTCZUSD" , bps)
-                            
+                            res = self.kClient.createOrder("buy", ltc, "XLTCZUSD", bps)
+
                             self.sellActivation = (ab[0]) + (ab[0] * self.sellMargin)
                             self.history.append(
                                 "Buy Order Added "
@@ -129,7 +129,6 @@ class brain:
                             time.sleep(1.2)
 
             if self.waitForOrder:
-                
 
                 od = self.currentOrder
                 amt = od[0]
@@ -150,7 +149,6 @@ class brain:
                         res = self.kClient.getClientBalance().json()["result"]
                         self.usd = float(res["ZUSD"])
                         self.ltc = float(res["XLTC"])
-                        
 
                         self.history.append(
                             "Buy Order Filled "
@@ -190,10 +188,8 @@ class brain:
                         self.waitForOrder = False
                         action = True
 
-        
-
-        #if len(self.history) > 128:
-         #   self.history = self.history[len(self.history) - 17 :]
-          #  self.history.append("Cleared Log")
+        # if len(self.history) > 128:
+        #   self.history = self.history[len(self.history) - 17 :]
+        #  self.history.append("Cleared Log")
 
         self.ticks += 1

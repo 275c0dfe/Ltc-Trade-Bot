@@ -1,9 +1,21 @@
 from scripts.requestRefrences import *
-import generation
+
+
+
+import random
+import math
+def randInt(min , mx):
+    r= random.random() - min
+    a = r * mx
+    return math.floor(a) + min
+
+content = ""
+
+
 try:
     ses_id = Data["Current_Login_Id"]
 except:
-    Data["Current_Login_Id"] = "_Undef(" + str(generation.randInt(2 , 512)) + ")"
+    Data["Current_Login_Id"] = "_Undef(" + str(randInt(2 , 512)) + ")"
 
 try:
     cs_id = cookie["Session_Id"]

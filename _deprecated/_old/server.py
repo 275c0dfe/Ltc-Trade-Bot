@@ -2,6 +2,10 @@ import socket
 import threading
 import time
 
+content_types = {}
+content_types["txt"] = "text/html"
+content_types["html"] = "text/html"
+content_types["py"] = "text/html"
 
 
 class HttpParser:
@@ -50,14 +54,11 @@ class HttpParser:
         res += ""
         return res
 
-
-class CObject:
-    pass
-
-
-def noop():
-    pass
-
+class qs_info:
+    def __init__(self):
+        self.qs = []
+        self.qs_found = False
+        self.URI = ""
 
 def ParseQs(qss):
     qs = {}
@@ -66,9 +67,8 @@ def ParseQs(qss):
         qs[i.split("=")[0].replace("+", " ")] = i.split("=")[1].replace("+", " ")
     return qs
 
-
 class HttpServer:
-    def __init__(self, host, name , ticker , tb):
+    def __init__(self, host, name, ticker, tb):
         self.host = host
         self.name = name
         self.files = []
@@ -83,7 +83,7 @@ class HttpServer:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.tokens = {}
         self.is_serving = False
-        self.is_debug = False
+        self.debug = False
         self.ticker = ticker
         self.trade_brain = tb
         self.Data = {}
@@ -93,182 +93,189 @@ class HttpServer:
         connection["listening"] = False
         connection["transmitting"] = False
         connection["recieving"] = False
-        self.connection = connection
-
+        
     def bind(self):
         self.socket.bind(self.host)
-        self.connection["bound"] = True
-
+        
     def handle_client(self, client):
-        csock = client["sock"]  # Get socket from client
-        upr = csock.recv(self.d_size)  # Recieve Request Data
-        if self.is_debug:
+        ClientSocket = client["sock"]  # Get socket from client
+        rawRequest = ClientSocket.recv(self.d_size)  # Recieve Request Data
+
+        _request_start = time.time()
+
+        if self.debug:
             print("new request: " + str(client["addr"]))
 
         try:  # Try to parse the request
-            req = self.parser.parseClient(upr.decode())
+            req = self.parser.parseClient(rawRequest.decode())
         except Exception as e:  # Handle Fail
-            if self.is_debug:
+            if self.debug:
                 print("Unable to parse Request")
                 print(e)
             return 0
 
         url = req["url"]  # Grab Url from Request Object
         cookie = {}
-        passCook = ""
+        passThroughCookieString = ""
         is_cookied = False
         try:
-            cook = req["headers"]["Cookie"]
+            rawCookie = req["headers"]["Cookie"]
             is_cookied = True
-            passCook = cook
-            items = cook.split(";")
+            passThroughCookieString = rawCookie
+            items = rawCookie.split(";")
             for it in items:
                 j = it.split("=")
                 k = j[0]
                 v = j[1]
                 cookie[k] = v
-            
         except Exception as e:
-            if self.is_debug:
+            if self.debug:
                 print("Cookie Exeption: " + str(e))
-        
+
         # QS Support
-        urlo = CObject()
-        urlo.qs = url.split("?")
-        urlo.qs_found = False
-        
-        if len(urlo.qs) > 1:
-            urlo.URI = urlo.qs[0]
-            urlo.qs = urlo.qs[1]
-            if urlo.qs != "":
-                urlo.qs = ParseQs(urlo.qs)
+        _qs = qs_info()
+        _qs.qs = url.split("?")
+        _qs.qs_found = False
+
+        if len(_qs.qs) > 1:
+            _qs.URI = _qs.qs[0]
+            _qs.qs = _qs.qs[1]
+            if _qs.qs != "":
+                _qs.qs = ParseQs(_qs.qs)
             else:
-                urlo.qs = "empty"
-            urlo.qs_found = True
-            url = urlo.URI
+                _qs.qs = "empty"
+            _qs.qs_found = True
+            url = _qs.URI
         else:
-            urlo.URI = url
+            _qs.URI = url
 
-        if urlo.qs_found:
-            if self.is_debug:
-                print("##QS##: " + str(urlo.qs))
+        if _qs.qs_found:
+            if self.debug:
+                print("##QS##: " + str(_qs.qs))
 
-        #
-        cache = self.cache  # Get Cache locally
-        located = False  # Kinda Self Explanitory
-        res = {}  # Response Config Object
+        cache = self.cache
+        locatedResource = False
+        responseObject = {}  # Response Config Object
         cid = -1  # Resource Id in Cache
-        rcont = ""  # Resource Data
-        sres = ""  # Response String
-        hobjec = {}
+        resourceContent = ""  # Resource Data
+        responseString = ""  # Response String
+        resourceObject = {}
 
         if url == "/":  # Fix / 404
             url = "/" + self.files[0]["PATH"]
-        
+
         for i in range(len(cache)):  # Check If Resource Cached
             ce = cache[i]
             if url == "/" + ce["path"]:
-                located = True
+                locatedResource = True
                 cid = i
-                rcont = ce["content"]
+                resourceContent = ce["content"]
                 try:
                     ce["action"]()
                 except:
                     pass
                 break
-        if located == False:  # Check File Index for Resource
-            for p in self.files:
-                if url == "/" + p["PATH"]:
-                    hobjec = p
-                    located = True
-                    f = open(p["PATH"], "r")
-                    rcont = f.read()
-                    f.close()
+
+        if locatedResource == False:  # Check File Index for Resource
+            for fileObject in self.files:
+                if url == "/" + fileObject["PATH"]:
+                    resourceObject = fileObject
+                    locatedResource = True
+                    resourceHandle = open(fileObject["PATH"], "r")
+                    resourceContent = resourceHandle.read()
+                    resourceHandle.close()
+
+                    # Cache System
                     try:
                         self.rrc[url] += 1
                     except:
                         self.rrc[url] = 1
                     if self.rrc[url] > 5:
-                        if p not in self.uncacheable:
+                        if fileObject not in self.uncacheable:
                             try:
-                                hobjec["action"]
-                                self.forceCache(p["PATH"], action=p["action"])
+                                resourceObject["action"]
+                                self.forceCache(
+                                    fileObject["PATH"], action=fileObject["action"]
+                                )
                             except:
-                                if self.is_debug:
-                                    print("caching: " + p["PATH"])
-                                self.forceCache(p["PATH"])
-
+                                if self.debug:
+                                    print("caching: " + fileObject["PATH"])
+                                self.forceCache(fileObject["PATH"])
                     break
 
-        if located:  # Respond With Resource
+        if locatedResource:  # Respond With Resource
 
-            #detokenize page
+            # detokenize page
             tokens = self.tokens.keys()
             for token in list(tokens):
-                while token in rcont:
-                    rcont = rcont.replace(token , self.tokens[token])
+                while token in resourceContent:
+                    resourceContent = resourceContent.replace(token, self.tokens[token])
 
-
-            types = {}
-            types["txt"] = "text/html"
-            types["html"] = "text/html"
-            types["py"] = "text/html"
+            # Check file type for special types
             ftype = url.split(".")[1]
-
             if ftype == "py":
-                execStr = rcont
+                _dscript_start = time.time()
+                execStr = resourceContent
                 envir = {}
                 envir["Data"] = self.Data
                 envir["wServer"] = self
-                envir["content"] = rcont
-                envir["urlInfo"] = urlo
+                envir["content"] = resourceContent
+                envir["urlInfo"] = _qs
                 envir["cookie"] = cookie
                 envir["client"] = client
                 envir["ticker"] = self.ticker
                 envir["bot_brain"] = self.trade_brain
                 try:
-                    exec(execStr , envir)
-                    rcont = envir["content"]
+                    exec(execStr, envir)
+                    resourceContent = envir["content"]
                 except Exception as e:
                     print(e)
+                _dscript_end = time.time()
+                if (_dscript_end - _dscript_start) * 1000 > 200:
+                    print(
+                        f"Http Server Warning: Dynamic Script {url} took over 200ms. Time Took {1000*(_dscript_end - _dscript_start)}"
+                    )
 
-
-
-            res["status_code"] = 200
-            res["content"] = rcont
+            responseObject["status_code"] = 200
+            responseObject["content"] = resourceContent
             heads = {}
             try:
-                heads["Content-Type"] = types[ftype]
+                heads["Content-Type"] = content_types[ftype]
             except:
                 heads["Content-Type"] = "text/html"
-            
+
             if is_cookied:
-                heads["Cookie"] = passCook
+                heads["Cookie"] = passThroughCookieString
             heads["Server"] = "Python"
             heads["connection"] = "close"
-            res["headers"] = heads
-            sres = self.parser.createRes(res)
+            responseObject["headers"] = heads
+            responseString = self.parser.createRes(responseObject)
             try:
-                if hobjec["action"] != None:
-                    hobjec["action"]()
+                if resourceObject["action"] != None:
+                    resourceObject["action"]()
             except KeyError:
                 pass
         else:  # Resource Not Found, Respond With 404 Error
 
-            res["status_code"] = 404
-            res["content"] = "404 Not Found"
+            responseObject["status_code"] = 404
+            responseObject["content"] = "404 Not Found"
             heads = {}
             heads["Content-Type"] = "text/html"
             heads["Server"] = "Python"
             heads["connection"] = "close"
-            res["headers"] = heads
-            sres = self.parser.createRes(res)
+            responseObject["headers"] = heads
+            responseString = self.parser.createRes(responseObject)
 
-        csock.send(sres.encode())  # Send Response string
-        csock.close()  # Close Socket
-        if self.is_debug:
+        ClientSocket.send(responseString.encode())
+        _request_end = time.time()
+        if (_request_end - _request_start) * 1000 > 300:
+            print(
+                f"Http Server: Performance Warning Request Took Over 300 ms. Time Taken: {1000*(_request_end-_request_start)}"
+            )
+        ClientSocket.close()
+        if self.debug:
             print("request served: " + url)
-            print("status: " + str(res["status_code"]))
+            print("status: " + str(responseObject["status_code"]))
             print("cached: " + str(cid != -1))
             if cid != -1:
                 print("Cache Id: " + str(cid))
@@ -285,15 +292,13 @@ class HttpServer:
 
     def listen(self, backlog):
         self.socket.listen(backlog)
-        self.connection["listening"] = True
         self.is_serving = True
 
-    def addFile(self, path, action=None , cacheable = True):
+    def addFile(self, path, action=None, cacheable=True):
         if not cacheable:
             self.uncacheable.append({"PATH": path, "action": action})
-            
+
         self.files.append({"PATH": path, "action": action})
-            
 
     def forceCache(self, path, action=None):
         f = open(path, "r")

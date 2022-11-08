@@ -1,81 +1,65 @@
-
-import network
 import kraken
-import time
 import os
-import brain
-import server
+import TradeAlgorithms
+import litehttp
+import ServerBindings
 import threading
+import time
+
+api_sec = os.environ["kraken_Secret"]
+api_key = os.environ["kraken_Key"]
+print("Secret: " , api_sec)
+print("Api Key: " , api_key)
+
+Currency = ["LTCUSD" , "XLTCZUSD"]
 
 
-mongo_key = "rOv9c0GrlZpq8MXs"
 
-api_sec = "GIz/HrbyV3T9OjtVVtoBxoCX0HicUtCKXiLhwX8mO1IyDbAGprEkweQ4YWp9b5gmLozhufyxFqXhka4DQuaFEg=="
-api_key = "mUN/wXLMwEof0jmutBJdEJbhf8jHft/PbILRTeWCyhd8/UA+A7IGHsxU"
-client = network.Client(api_key , api_sec , "0123")
+client = kraken.Client(api_key , api_sec , "null")
 
-pair = "LTCUSD"
-coinName = "XLTCZUSD"
-ltc_Ticker = network.Ticker()
-ltc_Ticker.pair = pair
-ltc_Ticker.name = coinName
+ticker =  kraken.Ticker()
+ticker.name = Currency[0]
+ticker.pair =  Currency[1]
 
-rateLimit = 3
-tradingBrain = brain.brain(client)
-res = client.getClientBalance().json()["result"]
-tradingBrain.usd = float(res["ZUSD"])
-tradingBrain.ltc = float(res["XLTC"])
+ticker.update()
 
-config = {"Enable_Brain_Trading":True}
+rateLimit = 2
+
+tradeAlgo = TradeAlgorithms.brain(client)
+res = client.getClientBalance().json()
 
 
-httpServer = server.HttpServer(("" , 80) , "Trading_Server" , ltc_Ticker , tradingBrain)
+res = res["result"]
 
-tradingBrain.history.append("Web Server Initializing")
-httpServer.addFile("scripts/route.py" , cacheable=False)
-httpServer.addFile("web/index.html" , cacheable=False)
-httpServer.addFile("web/api.js" , cacheable=False)
-httpServer.addFile("web/style.css" , cacheable=False)
-httpServer.addFile("web/login.html" , cacheable=False)
-httpServer.addFile("scripts/getData.py" , cacheable=False)
-httpServer.addFile("scripts/shutdown.py" , cacheable=False)
-httpServer.addFile("scripts/login.py" , cacheable=False)
-httpServer.addFile("scripts/setkey.py" , cacheable=False)
-httpServer.addFile("scripts/setData.py" , cacheable=False)
-httpServer.addFile("TradeHistory.txt")
+tradeAlgo.usd = float(res["ZUSD"])
+tradeAlgo.ltc = float(res["XLTC"])
 
-httpServer.tokens["$JqueryRefrence"] = "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js\"></script> "
-httpServer.tokens["$ApiRefrence"] = "<script src='/web/api.js' ></script>"
-httpServer.tokens["$StyleRefrence"] = "<link rel=\"stylesheet\" href=\"/web/style.css\">"
-httpServer.tokens["from scripts.requestRefrences import *"] = ""
-httpServer.tokens["$FontLink"] = "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Ubuntu&display=swap\" rel=\"stylesheet\">"
-
-httpServer.Data["Access_Key"] = "devKey001"
-
-
+config = {"Enable_Trading_Brain":True}
+httpServer = litehttp.HttpServer(("" , 80) , "" , ticker , tradeAlgo)
+ServerBindings.bindFilestoServer(httpServer)
 httpServer.bind()
 httpServer.listen(10)
+tradeAlgo.history.append("Kraken Client Started")
 
-tradingBrain.history.append("Web Server Initialized")
-tradingBrain.history.append("Kraken Client Started")
-Server_Thread = threading.Thread(target=httpServer.accept_loop)
-Server_Thread.start()
-print("Server Started")
-time.sleep(0.5)
+httpServerThread = threading.Thread(target=httpServer.accept_loop)
+httpServerThread.start()
+
+tradeAlgo.history.append("Http Server Active")
 
 
 def bot_loop():
-    while tradingBrain.loop:
+    while tradeAlgo.loop:
         try:
-            ud = ltc_Ticker.lastUpdate
+            ud = ticker.lastUpdate
             if time.time() - ud > rateLimit:
-                ltc_Ticker.update()
-                if tradingBrain.enabled:
-                    tradingBrain.update(ltc_Ticker.tickerData)
+                
+                ticker.update()
+                if tradeAlgo.enabled:
+                    tradeAlgo.update(ticker.tickerData)
             time.sleep(0.25)
         except KeyboardInterrupt:
             break
 
-bot_thread = threading.Thread(target=bot_loop)
-print("Starting bot")
-bot_thread.start()
+algoThread = threading.Thread(target= bot_loop)
+algoThread.start()
+print("LiteTrade Running")
