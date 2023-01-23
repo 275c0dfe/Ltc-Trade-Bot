@@ -57,14 +57,21 @@ class brain:
                             self.waitForOrder = True
 
                             ltcs = str(oltc).split(".")
-                            if len(ltcs[1]) > 2:
-                                ltcs[1] = ltcs[1][:1]
-                            ltcs = float(".".join(ltcs))
+                            if(len(ltcs)  > 1):
+                                if len(ltcs[1]) > 2:
+                                    ltcs[1] = ltcs[1][:1]
+                                ltcs = float(".".join(ltcs))
+                            else:
+                                ltcs = oltc
+                            
 
                             sps = str(sp).split(".")
-                            if len(sps[1]) > 2:
-                                sps[1] = sps[1][:1]
-                            sps = float(".".join(sps))
+                            if(len(sps) > 1):
+                                if len(sps[1]) > 2:
+                                    sps[1] = sps[1][:1]
+                                sps = float(".".join(sps))
+                            else:
+                                sps = sp
 
                             res = self.kClient.createOrder(
                                 "sell", oltc, "XLTCZUSD", sps

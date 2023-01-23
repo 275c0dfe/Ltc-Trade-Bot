@@ -26,22 +26,50 @@ function updateTicker() {
     });
 }
 
+var lock_scroll_bottom = false;
+
+function history_scroll_listener(e){
+    
+    if(e.scrollTop() + e.innerHeight() >= e[0].scrollHeight){
+        
+        lock_scroll_bottom = true;
+    }
+    else{
+        lock_scroll_bottom = false;
+    }
+    
+
+}
+
+
+
+
 function updateHistory() {
     $.get("/scripts/getData.py?getHistory=true", function (data) {
-
+		
         var elements = data.split(/\n/);
 
-        var container = $(".history_container")
+        var container = $(".history_container");
         var selem = "";
         for (var i = 0; i < elements.length; i++) {
             if (elements[i] != "") {
-                selem += "<li class='history_element'>" + elements[i] + "</li>";
+                
+				selem += "<li class='history_element'>" + elements[i] + "</li>";
+				
             }
         }
 
         container.html(selem);
+        
+        if(lock_scroll_bottom){
+            var cont = $(".history_container")
+            cont.scrollTop(cont[0].scrollHeight);
+        }
+        
+		
     });
 }
+
 
 function updateBalance() {
     $.get("/scripts/getData.py?getBalance=true", function (data) {
@@ -112,6 +140,7 @@ function revertCheck(name) {
 }
 
 function onDocumentLoad() {
+    //Create Listeners for text inputs
     var num_str = "1234567890.";
     function modified_text(event) {
         console.log(event);
@@ -142,8 +171,8 @@ function onDocumentLoad() {
         value_is_modified = true;
     }
 
+    //Create Controls
     var controls = ["buy_input", "sell_input", "buy_margin", "sell_margin"];
-
     for (var i = 0; i < controls.length; i++) {
         control = controls[i];
 
@@ -176,6 +205,11 @@ function onDocumentLoad() {
 
     });
 
+    $(".history_container").on("scroll" , ()=> {
+        history_scroll_listener($(".history_container")); 
+    });
+    
+    
 }
 function updateBotValues() {
     $.get("/scripts/getData.py?getBotInfo=true", function (data) {
@@ -237,8 +271,6 @@ function updateBotValues() {
         bot_values.sell_margin = sell_margin;
     });
 }
-
-
 
 
 function updateApp() {
