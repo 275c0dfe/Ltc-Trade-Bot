@@ -20,8 +20,18 @@ function getCookie(cname) {
     return "";
 }
 
+var ltc_price = 0;
+var balances = [];
+
+function updateTotalBalance(){
+    
+    var balance_usd = parseFloat(balances[1]) + (parseFloat(balances[0]) * ltc_price);
+    $("#total_balance").text("$" + balance_usd.toFixed(2).toString());
+}
+
 function updateTicker() {
     $.get("/scripts/getData.py?getTicker=true", function (data) {
+        ltc_price = parseFloat(data);
         $("#Ticker").text("Ltc Price: " + data);
     });
 }
@@ -74,6 +84,7 @@ function updateHistory() {
 function updateBalance() {
     $.get("/scripts/getData.py?getBalance=true", function (data) {
         var elements = data.split(/,/);
+        balances = elements;
         var ltc = elements[0];
         var usd = elements[1];
         $("#ltc_balance").text("Ltc: " + ltc);
@@ -139,14 +150,18 @@ function revertCheck(name) {
     value_is_modified = false;
 }
 
+
+//Bot Value Modification Listeners
+//Rendering Of Bot Value Entries
 function onDocumentLoad() {
     //Create Listeners for text inputs
     var num_str = "1234567890.";
     function modified_text(event) {
-        console.log(event);
+        
         value_name = event.srcElement.id;
-        var container = $(event.path[1]);
-        console.log(event)
+        
+        var container = $(event.composedPath()[1]);
+        
         if (container.children().length < 4) {
             if (num_str.includes(event.key)) {
                 $("<a onclick='modifyBotValue(\"" + value_name + "\" , " + event.srcElement.value + ")' class='button'>Save " + event.srcElement.value + "</a> <a onclick='revertValue(\"" + value_name + "\")' class='button'>Revert</a>").insertAfter("#" + value_name);
@@ -184,7 +199,7 @@ function onDocumentLoad() {
     var checkBox = document.getElementById("enable_bot");
     checkBox.addEventListener("change", (event) => {
         value_name = event.currentTarget.id;
-        var container = $(event.path[1]);
+        var container = $(event.composedPath()[1]);
         value = "";
         if (event.currentTarget.checked) {
             value = "true";
@@ -280,6 +295,7 @@ function updateApp() {
     }
     updateTicker();
     updateBalance();
+    setTimeout(updateTotalBalance , 500);
     updateHistory();
     updateBotValues();
 }

@@ -357,3 +357,179 @@ Buy Order Filled 6.141123006693825e-05 LTC/USD For $87.49. Total Usd: $0.0054
 #Kraken API Trade. buy 3.3703288877826867LTC At $86.78
 {"error":[],"result":{"txid":["O6YCFY-J7UAN-VED36P"],"descr":{"order":"buy 3.37032888 LTCUSD @ limit 86.78"}}}
 Buy Order Filled 3.3703288877826867 LTC/USD For $88.14. Total Usd: $292.4886
+#Kraken API Trade. buy 0.004906823940465847LTC At $87.69
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.004906823940465847 LTC/USD For $88.58. Total Usd: $0.43030000000000007
+#Kraken API Trade. sell 3.30602063LTC At $89.9
+{"error":[],"result":{"txid":["OHP3M5-LEX24-O2QGXJ"],"descr":{"order":"sell 3.30602063 LTCUSD @ limit 89.90"}}}
+Sell Order Filled 3.30602063 LTC/USD For $90.03. Total Usd: 297.6410373189
+#Kraken API Trade. buy 3.334825872321706LTC At $89.1
+{"error":[],"result":{"txid":["ONUJSE-WRHVI-Y5DJYJ"],"descr":{"order":"buy 3.33482587 LTCUSD @ limit 89.10"}}}
+Buy Order Filled 3.334825872321706 LTC/USD For $89.07. Total Usd: $297.166
+#Kraken API Trade. sell 3.32949018LTC At $90.4
+{"error":[],"result":{"txid":["OZ7P6V-FQAXQ-FGHTIB"],"descr":{"order":"sell 3.32949018 LTCUSD @ limit 90.40"}}}
+Sell Order Filled 3.32949018 LTC/USD For $90.45. Total Usd: 301.152386781
+#Kraken API Trade. buy 3.3569946953779755LTC At $89.52
+{"error":[],"result":{"txid":["O2EPN5-W3MDU-LHXI7D"],"descr":{"order":"buy 3.35699469 LTCUSD @ limit 89.52"}}}
+Buy Order Filled 3.3569946953779755 LTC/USD For $89.47. Total Usd: $300.5373
+#Kraken API Trade. sell 3.3516236LTC At $90.8
+{"error":[],"result":{"txid":["OXG7QE-C7WLA-K2A72P"],"descr":{"order":"sell 3.35162360 LTCUSD @ limit 90.80"}}}
+Sell Order Filled 3.3516236 LTC/USD For $90.82. Total Usd: 304.39445535199997
+#Kraken API Trade. buy 3.3813913064766874LTC At $89.86
+{"error":[],"result":{"txid":["OOAVZH-62S4A-SHKXWC"],"descr":{"order":"buy 3.38139130 LTCUSD @ limit 89.86"}}}
+Buy Order Filled 3.3813913064766874 LTC/USD For $90.02. Total Usd: $303.8596
+#Kraken API Trade. sell 0.0LTC At $91.4
+{"error":["EGeneral:Invalid arguments:volume"]}
+Sell Order Filled 0.0 LTC/USD For $90.08. Total Usd: 0.0
+#Kraken API Trade. buy 3.9312173052452994LTC At $89.11
+{"error":[],"result":{"txid":["OP273W-Z764K-YBZLRE"],"descr":{"order":"buy 3.93121730 LTCUSD @ limit 89.11"}}}
+Buy Order Filled 3.9312173052452994 LTC/USD For $89.06. Total Usd: $350.3493
+#Kraken API Trade. sell 3.92492732LTC At $90.5
+{"error":[],"result":{"txid":["OQ222P-UQPGP-I4GXRC"],"descr":{"order":"sell 3.92492732 LTCUSD @ limit 90.50"}}}
+Sell Order Filled 3.92492732 LTC/USD For $89.24. Total Usd: 350.2605140368
+#Kraken API Trade. buy 0.00043597409068261083LTC At $88.3
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.00043597409068261083 LTC/USD For $89.2. Total Usd: $0.0385
+#Kraken API Trade. sell 3.92492732LTC At $90.6
+{"error":["EOrder:Insufficient funds"]}
+Sell Order Filled 3.92492732 LTC/USD For $89.2. Total Usd: 350.10351694400003
+#Kraken API Trade. buy 3.958665126602346LTC At $88.3
+{"error":[],"result":{"txid":["OVJPGL-DZESM-QQZ3OG"],"descr":{"order":"buy 3.95866512 LTCUSD @ limit 88.30"}}}
+Buy Order Filled 3.958665126602346 LTC/USD For $88.47. Total Usd: $349.5818
+#Kraken API Trade. sell 3.95233126LTC At $89.7
+{"error":[],"result":{"txid":["OXKBM7-PCSPI-3VFT5O"],"descr":{"order":"sell 3.95233126 LTCUSD @ limit 89.70"}}}
+Sell Order Filled 3.95233126 LTC/USD For $88.0. Total Usd: 347.80515088
+#Kraken API Trade. buy 3.982611079000725LTC At $87.19
+{"error":[],"result":{"txid":["O5PRYO-67FED-4AR5SJ"],"descr":{"order":"buy 3.98261107 LTCUSD @ limit 87.19"}}}
+Buy Order Filled 3.982611079000725 LTC/USD For $95.38. Total Usd: $347.2805
+#Kraken API Trade. sell 0.0LTC At $90.5
+{"error":["EGeneral:Invalid arguments:volume"]}
+Sell Order Filled 0.0 LTC/USD For $89.24. Total Usd: 0.0
+#Kraken API Trade. buy 3.9534360851840846LTC At $87.84
+{"error":[],"result":{"txid":["OVPCYM-TOQFY-PX3VUW"],"descr":{"order":"buy 3.95343608 LTCUSD @ limit 87.84"}}}
+Buy Order Filled 3.9534360851840846 LTC/USD For $88.73. Total Usd: $347.2805
+#Kraken API Trade. sell 0.0LTC At $90.1
+{"error":["EGeneral:Invalid arguments:volume"]}
+Sell Order Filled 0.0 LTC/USD For $88.84. Total Usd: 0.0
+#Kraken API Trade. buy 3.9592368379050096LTC At $87.71
+{"error":["EOrder:Insufficient funds"]}
+Buy Order Filled 3.9592368379050096 LTC/USD For $88.6. Total Usd: $347.2805
+#Kraken API Trade. sell 0.0LTC At $90.1
+{"error":["EGeneral:Invalid arguments:volume"]}
+Sell Order Filled 0.0 LTC/USD For $88.78. Total Usd: 0.0
+#Kraken API Trade. buy 3.9690923720115845LTC At $87.49
+{"error":["EOrder:Insufficient funds"]}
+Buy Order Filled 3.9690923720115845 LTC/USD For $88.38. Total Usd: $347.2805
+#Kraken API Trade. sell 0.0LTC At $89.9
+{"error":["EGeneral:Invalid arguments:volume"]}
+Sell Order Filled 0.0 LTC/USD For $88.66. Total Usd: 0.0
+#Kraken API Trade. buy 3.962367376464293LTC At $87.64
+{"error":["EOrder:Insufficient funds"]}
+Buy Order Filled 3.962367376464293 LTC/USD For $88.53. Total Usd: $347.2805
+#Kraken API Trade. sell 0.0LTC At $90.2
+{"error":["EGeneral:Invalid arguments:volume"]}
+Sell Order Filled 0.0 LTC/USD For $95.47. Total Usd: 0.0
+#Kraken API Trade. buy 3.6754859999830667LTC At $94.48
+{"error":[],"result":{"txid":["OSOBVS-FCXKU-OPDICU"],"descr":{"order":"buy 3.67548599 LTCUSD @ limit 94.48"}}}
+Buy Order Filled 3.6754859999830667 LTC/USD For $94.48. Total Usd: $347.2805
+#Kraken API Trade. sell 3.66960528LTC At $95.8
+{"error":[],"result":{"txid":["OVNVBT-HEJQW-MCPFIF"],"descr":{"order":"sell 3.66960528 LTCUSD @ limit 95.80"}}}
+Sell Order Filled 3.66960528 LTC/USD For $94.0. Total Usd: 344.94289632
+#Kraken API Trade. buy 0.0002213625617880937LTC At $93.06
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.0002213625617880937 LTC/USD For $94.0. Total Usd: $0.0206
+#Kraken API Trade. sell 3.66960528LTC At $95.5
+{"error":[],"result":{"txid":["OCCOTL-MUAHN-L5KLTA"],"descr":{"order":"sell 3.66960528 LTCUSD @ limit 95.50"}}}
+Sell Order Filled 3.66960528 LTC/USD For $94.06. Total Usd: 345.1630726368
+#Kraken API Trade. buy 0.0002213390150843613LTC At $93.06
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.0002213390150843613 LTC/USD For $94.01. Total Usd: $0.0206
+#Kraken API Trade. sell 3.66960528LTC At $95.4
+{"error":[],"result":{"txid":["OLNUUF-2MQXL-VSZAT2"],"descr":{"order":"sell 3.66960528 LTCUSD @ limit 95.40"}}}
+Sell Order Filled 3.66960528 LTC/USD For $94.07. Total Usd: 345.1997686896
+#Kraken API Trade. buy 3.6993886117663233LTC At $93.09
+{"error":[],"result":{"txid":["OKQYYN-LIWNP-T7YRJA"],"descr":{"order":"buy 3.69938861 LTCUSD @ limit 93.09"}}}
+Buy Order Filled 3.6993886117663233 LTC/USD For $100.63. Total Usd: $344.4116
+#Kraken API Trade. buy 2.624771365355879LTC At $98.57
+{"error":[],"result":{"txid":["OCTDNO-2RYJR-T7CA5M"],"descr":{"order":"buy 2.62477136 LTCUSD @ limit 98.57"}}}
+Buy Order Filled 2.624771365355879 LTC/USD For $100.62. Total Usd: $258.735
+#Kraken API Trade. sell 0.85228156LTC At $102.1
+{"error":[],"result":{"txid":["OFBRSF-644CH-ECW5E7"],"descr":{"order":"sell 0.85228156 LTCUSD @ limit 102.10"}}}
+Sell Order Filled 0.85228156 LTC/USD For $100.66. Total Usd: 85.7906618296
+#Kraken API Trade. buy 2.597381085753179LTC At $99.61
+{"error":[],"result":{"txid":["OFZ35M-CZYHT-GE2BM4"],"descr":{"order":"buy 2.59738108 LTCUSD @ limit 99.61"}}}
+Buy Order Filled 2.597381085753179 LTC/USD For $99.58. Total Usd: $258.735
+#Kraken API Trade. sell 3.44550693LTC At $101.0
+{"error":[],"result":{"txid":["OKB4V5-G4J2F-7P4IVX"],"descr":{"order":"sell 3.44550693 LTCUSD @ limit 101.00"}}}
+Sell Order Filled 3.44550693 LTC/USD For $101.0. Total Usd: 347.99619993
+#Kraken API Trade. buy 3.4751835615287447LTC At $99.98
+{"error":[],"result":{"txid":["OGAWU5-WTDPM-5PBHE5"],"descr":{"order":"buy 3.47518356 LTCUSD @ limit 99.98"}}}
+Buy Order Filled 3.4751835615287447 LTC/USD For $99.98. Total Usd: $347.4492
+#Kraken API Trade. sell 3.46962325LTC At $101.4
+{"error":[],"result":{"txid":["OCDIUN-72LDG-TQ5KL6"],"descr":{"order":"sell 3.46962325 LTCUSD @ limit 101.40"}}}
+Sell Order Filled 3.46962325 LTC/USD For $95.44. Total Usd: 331.14084298
+#Kraken API Trade. buy 3.4779871838450984LTC At $95.31
+{"error":[],"result":{"txid":["OKHR4N-4MAYM-KEQ643"],"descr":{"order":"buy 3.47798718 LTCUSD @ limit 95.31"}}}
+Buy Order Filled 3.4779871838450984 LTC/USD For $95.33. Total Usd: $331.512
+#Kraken API Trade. sell 3.47242239LTC At $96.7
+{"error":[],"result":{"txid":["OI3OP5-TELD5-XHWDI6"],"descr":{"order":"sell 3.47242239 LTCUSD @ limit 96.70"}}}
+Sell Order Filled 3.47242239 LTC/USD For $96.75. Total Usd: 335.95686623250003
+#Kraken API Trade. buy 3.50069852964209LTC At $95.77
+{"error":[],"result":{"txid":["OG54WL-H3GUH-4EGRFL"],"descr":{"order":"buy 3.50069852 LTCUSD @ limit 95.77"}}}
+Buy Order Filled 3.50069852964209 LTC/USD For $98.73. Total Usd: $335.271
+#Kraken API Trade. buy 3.3493974459259794LTC At $100.09
+{"error":[],"result":{"txid":["ODWIHJ-34DF6-A52Z24"],"descr":{"order":"buy 3.34939744 LTCUSD @ limit 100.09"}}}
+Buy Order Filled 3.3493974459259794 LTC/USD For $100.14. Total Usd: $335.271
+#Kraken API Trade. sell 3.34403934LTC At $101.3
+{"error":[],"result":{"txid":["OGAIBL-VMA2S-Q333CH"],"descr":{"order":"sell 3.34403934 LTCUSD @ limit 101.30"}}}
+#Kraken API Trade. buy 3.5079285023806523LTC At $99.93
+{"error":[],"result":{"txid":["OSBRRW-XXS5E-YWFCUA"],"descr":{"order":"buy 3.50792850 LTCUSD @ limit 99.93"}}}
+Buy Order Filled 3.5079285023806523 LTC/USD For $99.92. Total Usd: $350.5494
+#Kraken API Trade. sell 3.50231577LTC At $101.3
+{"error":[],"result":{"txid":["OJA5DW-K62Y5-6HPWK6"],"descr":{"order":"sell 3.50231577 LTCUSD @ limit 101.30"}}}
+Sell Order Filled 3.50231577 LTC/USD For $101.28. Total Usd: 354.7145411856
+#Kraken API Trade. buy 3.531007299881276LTC At $100.31
+{"error":[],"result":{"txid":["OQDRNY-LH7QD-LKQ3DJ"],"descr":{"order":"buy 3.53100729 LTCUSD @ limit 100.31"}}}
+Buy Order Filled 3.531007299881276 LTC/USD For $100.31. Total Usd: $354.219
+#Kraken API Trade. sell 3.5253577LTC At $101.8
+{"error":[],"result":{"txid":["OPGJFX-OVXUX-T7I5NA"],"descr":{"order":"sell 3.52535770 LTCUSD @ limit 101.80"}}}
+Sell Order Filled 3.5253577 LTC/USD For $93.67. Total Usd: 330.220255759
+#Kraken API Trade. buy 0.00025620070568700703LTC At $92.5
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.00025620070568700703 LTC/USD For $93.44. Total Usd: $0.0237
+#Kraken API Trade. sell 3.67459863LTC At $94.8
+{"error":[],"result":{"txid":["ODNSHM-ICAGS-5H7ZCO"],"descr":{"order":"sell 3.67459863 LTCUSD @ limit 94.80"}}}
+#Kraken API Trade. buy 0.00025614587994215646LTC At $92.52
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.00025614587994215646 LTC/USD For $93.46. Total Usd: $0.023700000000000002
+#Kraken API Trade. sell 3.67459863LTC At $94.8
+{"error":[],"result":{"txid":["OJIK7O-EXGZL-LC3KMH"],"descr":{"order":"sell 3.67459863 LTCUSD @ limit 94.80"}}}
+Sell Order Filled 3.67459863 LTC/USD For $93.47. Total Usd: 343.4647339461
+#Kraken API Trade. buy 0.00025614587994215646LTC At $92.52
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.00025614587994215646 LTC/USD For $93.46. Total Usd: $0.023700000000000002
+#Kraken API Trade. sell 3.67459863LTC At $94.8
+{"error":[],"result":{"txid":["OIN766-4XZNO-WXNT47"],"descr":{"order":"sell 3.67459863 LTCUSD @ limit 94.80"}}}
+Sell Order Filled 3.67459863 LTC/USD For $93.42. Total Usd: 343.2810040146
+#Kraken API Trade. buy 0.00025631042761663746LTC At $92.46
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.00025631042761663746 LTC/USD For $93.4. Total Usd: $0.023700000000000002
+#Kraken API Trade. sell 3.67459863LTC At $94.8
+{"error":[],"result":{"txid":["OU4RQV-DWTJI-HTWIKY"],"descr":{"order":"sell 3.67459863 LTCUSD @ limit 94.80"}}}
+#Kraken API Trade. buy 0.00025644771225917447LTC At $92.41
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.00025644771225917447 LTC/USD For $93.35. Total Usd: $0.0237
+#Kraken API Trade. sell 3.67459863LTC At $94.7
+{"error":[],"result":{"txid":["OUS24F-DUBT2-XMA7GQ"],"descr":{"order":"sell 3.67459863 LTCUSD @ limit 94.70"}}}
+Sell Order Filled 3.67459863 LTC/USD For $93.36. Total Usd: 343.0605280968
+#Kraken API Trade. buy 0.00025644771225917447LTC At $92.41
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.00025644771225917447 LTC/USD For $93.35. Total Usd: $0.0237
+#Kraken API Trade. sell 3.67459863LTC At $94.7
+{"error":[],"result":{"txid":["OC2GVV-CIVYE-Z6R5M2"],"descr":{"order":"sell 3.67459863 LTCUSD @ limit 94.70"}}}
+Sell Order Filled 3.67459863 LTC/USD For $93.39. Total Usd: 343.1707660557
+#Kraken API Trade. buy 0.0002563653238315907LTC At $92.44
+{"error":["EGeneral:Invalid arguments:volume"]}
+Buy Order Filled 0.0002563653238315907 LTC/USD For $93.38. Total Usd: $0.0237
+#Kraken API Trade. sell 3.67459863LTC At $94.7
+{"error":[],"result":{"txid":["OZITM7-GA3W3-R4ICNX"],"descr":{"order":"sell 3.67459863 LTCUSD @ limit 94.70"}}}

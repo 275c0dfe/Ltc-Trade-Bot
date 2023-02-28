@@ -43,7 +43,7 @@ class brain:
 
             if self.waitSell:
                 if self.sellActivation > (self.lastBuy + 0.20):
-                    if self.sellActivation > ticker.bid.price:
+                    if self.sellActivation > ticker.ask.price:
                         if not self.waitForOrder:
                             self.waitBuy = True
                             self.waitSell = False
@@ -92,7 +92,7 @@ class brain:
                             time.sleep(1.2)
 
             if self.waitBuy:
-                if self.BuyActivation < ticker.ask.price:
+                if self.BuyActivation < ticker.bid.price:
                     if self.BuyActivation < self.lastSell:
                         if not self.waitForOrder:
                             self.waitBuy = False
