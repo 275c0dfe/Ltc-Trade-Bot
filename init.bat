@@ -1,6 +1,6 @@
 @echo off
-set kraken_Secret=GIz/HrbyV3T9OjtVVtoBxoCX0HicUtCKXiLhwX8mO1IyDbAGprEkweQ4YWp9b5gmLozhufyxFqXhka4DQuaFEg==
-set kraken_Key=mUN/wXLMwEof0jmutBJdEJbhf8jHft/PbILRTeWCyhd8/UA+A7IGHsxU
+set kraken_Secret=[OLD]
+set kraken_Key=[OLD
 echo Enviroment Setup Complete
 echo Starting liteTrade
 python3 main.py
